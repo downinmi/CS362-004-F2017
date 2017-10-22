@@ -1,5 +1,8 @@
 CFLAGS = -Wall -fpic -coverage -lm
 
+
+	
+
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
 
@@ -33,7 +36,52 @@ runtests: testDrawCard
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
+
+unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c dominion.o rngs.o
+	echo "Result for running dominion.c unit tests:" > unittestresults.out
+	
+	echo "\nunittest1.c:" >> unittestresults.out
+	gcc -o unittest1 dominion.o rngs.o unittest1.c $(CFLAGS)
+	./unittest1 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	
+	echo "\nunittest2.c:" >> unittestresults.out
+	gcc -o unittest2 dominion.o rngs.o unittest2.c $(CFLAGS)
+	./unittest2 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	
+	echo "\nunittest3.c:" >> unittestresults.out
+	gcc -o unittest3 dominion.o rngs.o unittest3.c $(CFLAGS)
+	./unittest3 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	
+	echo "\nunittest4.c:" >> unittestresults.out
+	gcc -o unittest4 dominion.o rngs.o unittest4.c $(CFLAGS)
+	./unittest4 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+	
+	echo "\ncardtest1.c:" >> unittestresults.out
+	gcc -o cardtest1 dominion.o rngs.o cardtest1.c $(CFLAGS)
+	./cardtest1 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+
+	echo "\ncardtest2.c:" >> unittestresults.out
+	gcc -o cardtest2 dominion.o rngs.o cardtest2.c $(CFLAGS)
+	./cardtest2 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+
+	echo "\ncardtest3.c:" >> unittestresults.out
+	gcc -o cardtest3 dominion.o rngs.o cardtest3.c $(CFLAGS)
+	./cardtest3 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+
+	echo "\ncardtest4.c:" >> unittestresults.out
+	gcc -o cardtest4 dominion.o rngs.o cardtest4.c $(CFLAGS)
+	./cardtest4 >> unittestresults.out
+	gcov dominion.c >> unittestresults.out
+
+	
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittestresults.out unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
