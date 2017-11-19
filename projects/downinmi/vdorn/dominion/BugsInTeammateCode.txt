@@ -1,0 +1,56 @@
+
+
+Adventurer Card Implementation bug
+***************************************************
+Result for running dominion.c random tests(Adventurer):
+
+randomtestadventurer.c:
+Testing Adventure Card: 3 Players  50000 Tests
+Testing Player 0...
+Errors with Deck Treasure Counts: 11/50000 
+Errors with Hand Treasure Counts: 11/50000 
+Errors with Deck / Discard Count: 48799/50000 
+Testing Player 1...
+Errors with Deck Treasure Counts: 15/50000 
+Errors with Hand Treasure Counts: 15/50000 
+Errors with Deck / Discard Count: 48781/50000 
+Testing Player 2...
+Errors with Deck Treasure Counts: 23/50000 
+Errors with Hand Treasure Counts: 23/50000 
+Errors with Deck / Discard Count: 48748/50000 
+File 'dominion.c'
+Lines executed:40.50% of 558
+Creating 'dominion.c.gcov'
+
+The Adventurer card is not correctly moving the cards to the discard pile for most iterations. (There is also a problem with some of the treasure counts, but I had this in my code too, and I believe it to possibly be a problem with shuffle())
+
+
+   while(z - 1 > 0){   //<-BUG IS HERE  'z - 1 > 0' should be 'z - 1 >= 0'
+	// discard all cards in play that have been drawn
+	state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; 
+	z = z - 1;
+
+It looks like the problem with the code is that we are checking z-1 with > 0 instead of = 0. This will cause one card that should be discarded to not be discarded, unless we don’t have any non-treasure cards ahead of our treasure cards in the deck (i.e., there’s nothing to discard)
+
+Council Room Implementation Bug
+****************************************************
+
+cardtest3.c:
+Card Test 3 -  Council Room
+Playing Council Room 500 times...FAILED
+Tests:
+Current Player Deck Correctly Decreased By Four - FAILED
+Current Player Hand Correctly Increased By Three (Four - discard) - FAILED
+Other Players' Hands Increased By One - PASSED
+Current Player Buys Increased By One  - PASSED
+File 'dominion.c'
+Lines executed:39.43% of 558
+Creating 'dominion.c.gcov'
+
+The implementation of Council Room is failing to handle the card drawing for the player correctly. It is handling the other players drawing and the buys correctly.
+
+Looking at the loop responsible for drawing the card it is clear that the increment counter is incorrectly initialized to 1 instead of 0. 
+
+	for (i = 1; i < 4; i++){  //<-BUG IS HERE    'i = 1' should be 'i = 0'
+		drawCard(currentPlayer, state);
+	}
