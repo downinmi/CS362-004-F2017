@@ -21,7 +21,6 @@ import junit.framework.TestCase;
 
 
 
-
 /**
  * Performs Validation Test for url validations.
  *
@@ -42,6 +41,8 @@ public class UrlValidatorTest extends TestCase {
    {
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   System.out.println(urlVal.isValid("http://www.amazon.com"));
+	   System.out.println(urlVal.isValid("http://www.amazon.com:80?\n"));
+	   
 	   
 	   
    }
@@ -59,6 +60,10 @@ public class UrlValidatorTest extends TestCase {
    
    public void testIsValid()
    {
+	    
+	   
+
+	   
 	   for(int i = 0;i<10000;i++)
 	   {
 		   
