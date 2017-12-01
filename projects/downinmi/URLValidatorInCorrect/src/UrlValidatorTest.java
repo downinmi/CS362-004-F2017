@@ -49,9 +49,15 @@ public class UrlValidatorTest extends TestCase {
 	   System.out.println(urlVal.isValid("http://255.255.255.255")); //true
 	   System.out.println(urlVal.isValid("http://www.amazon.com:80")); //true
 	   System.out.println(urlVal.isValid("http://www.amazon.com:80/test1/file")); //true
+<<<<<<< HEAD
 	   System.out.println(urlVal.isValid("http://www.amazon.com/?action=view")); //false, but should return true
 	   System.out.println(urlVal.isValid("http://www.amazon.com/?action=edit&mode=up")); //false, but should return true
 	   System.out.println(urlVal.isValid("http://www.amazon.com:80/?action=view")); //false, but should return true
+=======
+	   System.out.println(urlVal.isValid("http://www.amazon.com?action=view")); //false, but should return true
+	   System.out.println(urlVal.isValid("http://www.amazon.com?action=edit&mode=up")); //false, but should return true
+	   System.out.println(urlVal.isValid("http://www.amazon.com:80?action=view")); //false, but should return true
+>>>>>>> d9f929929ce4da8870f56cb2ecfff551a97c722b
 	   System.out.println(urlVal.isValid("http://www.amazon.com/../")); //false
 	   System.out.println(urlVal.isValid("http://www.google.com/../")); //false
 	   System.out.println(urlVal.isValid("http://www.google.com:65a")); //false
@@ -79,14 +85,23 @@ public class UrlValidatorTest extends TestCase {
 	   System.out.println("Starting First Partition");
 	   UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	   System.out.println(urlVal.isValid("http://www.amazon.com:80/test")); //true
+<<<<<<< HEAD
 	   System.out.println(urlVal.isValid("http://www.amazon.com:0/?action=edit&mode=up")); //true
 	   System.out.println(urlVal.isValid("http://www.amazon.com:0/?action=edit&mode=up")); //true
+=======
+	   System.out.println(urlVal.isValid("http://www.amazon.com:0?action=edit&mode=up")); //true
+	   System.out.println(urlVal.isValid("http://www.amazon.com:0?action=edit&mode=up")); //true
+>>>>>>> d9f929929ce4da8870f56cb2ecfff551a97c722b
 	   System.out.println(urlVal.isValid("ftp://www.google.com:65535")); //true
 	   System.out.println(urlVal.isValid("https://www.google.com:65535")); //true
 	   System.out.println(urlVal.isValid("h3t://www.google.com:65535")); //true
 	   System.out.println(urlVal.isValid("http://www.facebook.com")); //true
 	   System.out.println(urlVal.isValid("https://www.facebook.com")); //true
+<<<<<<< HEAD
 	   System.out.println(urlVal.isValid("https://www.facebook.com/?action=view")); //true
+=======
+	   System.out.println(urlVal.isValid("https://www.facebook.com?action=view")); //true
+>>>>>>> d9f929929ce4da8870f56cb2ecfff551a97c722b
 	   System.out.println("\n");
    }
    
@@ -100,9 +115,15 @@ public class UrlValidatorTest extends TestCase {
 	   System.out.println(urlVal.isValid("http://ww.facebook.com")); //false
 	   System.out.println(urlVal.isValid("http://www..google.com")); //false
 	   System.out.println(urlVal.isValid("http://www.google.com:80a")); //false
+<<<<<<< HEAD
 	   System.out.println(urlVal.isValid("http://www.google.com:80/testing123")); //false
 	   System.out.println(urlVal.isValid("http://www.google.com:80/param?=&valid?param&=valid")); //false
 	   System.out.println(urlVal.isValid("http://www.google.com:80/?&=+?&")); //false
+=======
+	   System.out.println(urlVal.isValid("http://www.google.com:80testing123")); //false
+	   System.out.println(urlVal.isValid("http://www.google.com:80param?=&valid?param&=valid")); //false
+	   System.out.println(urlVal.isValid("http://www.google.com:80?&=+?&")); //false
+>>>>>>> d9f929929ce4da8870f56cb2ecfff551a97c722b
 	   System.out.println(urlVal.isValid("http://www.facebook.com/..")); //false
 	   System.out.println(urlVal.isValid("http://www.facebook.com/..//test")); //false
 	   System.out.println(urlVal.isValid("http://www.facebook.com/../test")); //false
@@ -173,8 +194,12 @@ public class UrlValidatorTest extends TestCase {
 		   new ResultPair("https://", true),
 		   new ResultPair("ftp://", true),
 		   new ResultPair("http:/", false),
+<<<<<<< HEAD
 		   new ResultPair("http//", false),
 		   new ResultPair("", true)};
+=======
+		   new ResultPair("http//", false)};
+>>>>>>> d9f929929ce4da8870f56cb2ecfff551a97c722b
    ResultPair[] testUrlAuthority = {new ResultPair("www.google.com", true),
 		   new ResultPair("www..google.com", false),
 		   new ResultPair("www.amazon.com", true),
@@ -182,6 +207,7 @@ public class UrlValidatorTest extends TestCase {
 		   new ResultPair("ww.google.com", false),
 		   new ResultPair("www.google.c", false),
 		   new ResultPair("www.google..com", false),
+<<<<<<< HEAD
 		   new ResultPair("www/google.com", false),
 		   new ResultPair("255.255.255.256", false),
 		   new ResultPair("255.255.255.255", true)};
@@ -204,6 +230,12 @@ public class UrlValidatorTest extends TestCase {
 		   new ResultPair("testing123", false),
 		   new ResultPair("?action=edit&mode=up", true),
 		   new ResultPair("", true)};
+=======
+		   new ResultPair("www/google.com", false)};
+   ResultPair[] testUrlPort = {new ResultPair(":80", true)};
+   ResultPair[] testPath = {new ResultPair("/test1", true)};
+   ResultPair[] testUrlQuery = {new ResultPair("?action=view", true)};
+>>>>>>> d9f929929ce4da8870f56cb2ecfff551a97c722b
    
    //what we will pass to testIsValid
    Object[] testUrlParts = {testUrlScheme, testUrlAuthority, testUrlPort, testPath, testUrlQuery};
@@ -212,5 +244,9 @@ public class UrlValidatorTest extends TestCase {
    System.out.println("Starting testAnyOtherUnitTest... ");
 
    testIsValid(testUrlParts);
+<<<<<<< HEAD
    }
+=======
+}
+>>>>>>> d9f929929ce4da8870f56cb2ecfff551a97c722b
 }
